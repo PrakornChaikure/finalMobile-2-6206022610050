@@ -18,8 +18,9 @@ class _ViewState extends State<View> {
   TextEditingController heightController = new TextEditingController();
   TextEditingController sexController = new TextEditingController();
   TextEditingController yearController = new TextEditingController();
+  TextEditingController bmController = new TextEditingController();
 
-  double _result;
+  double result;
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _ViewState extends State<View> {
     heightController.text = widget.country['height'];
     sexController.text = widget.country['sex'];
     yearController.text = widget.country['year'];
+    bmController.text = widget.country['bm'];
   }
 
   @override
@@ -38,7 +40,7 @@ class _ViewState extends State<View> {
       backgroundColor: Color(0xff00BCD1),
       appBar: AppBar(
         //backgroundColor: Color.fromRGBO(56, 75, 49, 1.0),
-        title: Text("BMI"),
+        title: Text("EDIT BMI"),
         actions: [
           IconButton(
               icon: Icon(Icons.delete),
@@ -90,6 +92,34 @@ class _ViewState extends State<View> {
                 decoration: inputDecoration("Year"),
                 controller: yearController,
               ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                style: TextStyle(color: Colors.white),
+                decoration: inputDecoration("BMI"),
+                controller: bmController,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              RaisedButton(
+                color: Colors.pinkAccent,
+                child: Text(
+                  "Calculate",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: calculateBMI,
+              ),
+              SizedBox(height: 20),
+              Text(
+                result == null ? "Enter Value" : "${result.toStringAsFixed(2)}",
+                style: TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 19.4,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
             ],
           ),
         ),
@@ -107,7 +137,8 @@ class _ViewState extends State<View> {
                     weightController.text,
                     heightController.text,
                     sexController.text,
-                    yearController.text);
+                    yearController.text,
+                    bmController.text);
                 Navigator.pop(context, true);
               },
               child: Text(
@@ -144,9 +175,9 @@ class _ViewState extends State<View> {
     double weight = double.parse(weightController.text);
 
     double heightSquare = height * height;
-    double result = weight / heightSquare;
+    double results = weight / heightSquare;
 
-    _result = result;
+    result = results;
 
     setState(() {});
   }

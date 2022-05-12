@@ -17,8 +17,8 @@ class _AddState extends State<Add> {
   TextEditingController heightController = new TextEditingController();
   TextEditingController sexController = new TextEditingController();
   TextEditingController yearController = new TextEditingController();
-
-  double _result;
+  TextEditingController bmController = new TextEditingController();
+  double result;
 
   @override
   void initState() {
@@ -83,6 +83,34 @@ class _AddState extends State<Add> {
                 decoration: inputDecoration("Year"),
                 controller: yearController,
               ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                style: TextStyle(color: Colors.white),
+                decoration: inputDecoration("BMI"),
+                controller: bmController,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              RaisedButton(
+                color: Colors.pinkAccent,
+                child: Text(
+                  "Calculate",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: calculateBMI,
+              ),
+              SizedBox(height: 20),
+              Text(
+                result == null ? "Enter Value" : "${result.toStringAsFixed(2)}",
+                style: TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 19.4,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
             ],
           ),
         ),
@@ -100,11 +128,12 @@ class _AddState extends State<Add> {
                     weightController.text,
                     heightController.text,
                     sexController.text,
-                    yearController.text);
+                    yearController.text,
+                    bmController.text);
                 Navigator.pop(context, true);
               },
               child: Text(
-                "Calculate",
+                "Save",
                 style: TextStyle(color: Colors.white),
               )),
         ),
@@ -137,10 +166,8 @@ class _AddState extends State<Add> {
     double weight = double.parse(weightController.text);
 
     double heightSquare = height * height;
-    double result = weight / heightSquare;
-
-    _result = result;
-
+    double results = weight / heightSquare;
+    result = results;
     setState(() {});
   }
 }

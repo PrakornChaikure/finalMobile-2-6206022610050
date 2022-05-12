@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Color(0xff00BCD1),
       appBar: AppBar(
         //backgroundColor: Color.fromRGBO(56, 75, 49, 1.0),
-        title: Text("Firebase CRUD New"),
+        title: Text("LIST BMI"),
       ),
       body: ListView.builder(
         itemCount: docs.length,

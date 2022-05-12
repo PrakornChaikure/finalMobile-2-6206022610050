@@ -8,7 +8,7 @@ class Database {
   }
 
   Future<void> create(String name, String weight, String height, String sex,
-      String year) async {
+      String year, String bm) async {
     try {
       await firestore.collection("BMI").add({
         'height': height,
@@ -16,6 +16,7 @@ class Database {
         'weight': weight,
         'sex': sex,
         'year': year,
+        'bm': bm,
         'times': FieldValue.serverTimestamp()
       });
     } catch (e) {
@@ -45,6 +46,7 @@ class Database {
             "weight": doc["weight"],
             "sex": doc["sex"],
             "year": doc["year"],
+            "bm": doc["bm"]
           };
           docs.add(a);
         }
@@ -56,7 +58,7 @@ class Database {
   }
 
   Future<void> update(String id, String name, String weight, String height,
-      String sex, String year) async {
+      String sex, String year, String bm) async {
     try {
       await firestore.collection("BMI").doc(id).update({
         'name': name,
@@ -64,6 +66,7 @@ class Database {
         'height': height,
         'sex': sex,
         'year': year,
+        'bm': bm
       });
     } catch (e) {
       print(e);
